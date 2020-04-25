@@ -41,5 +41,12 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        sh '''minikube service bluegreenlb --url
+'''
+      }
+    }
+
   }
 }
