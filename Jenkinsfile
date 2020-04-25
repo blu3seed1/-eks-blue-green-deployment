@@ -10,8 +10,8 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh '''cd blue && docker build -t deployblue . && cd ..'''
-	sh '''cd green && docker build -t deploygreen . && cd ..'''
+        sh 'cd blue && docker build -t deployblue:capstone . && cd ..'
+        sh 'cd green && docker build -t deploygreen:capstone . && cd ..'
       }
     }
 
