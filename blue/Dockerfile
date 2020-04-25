@@ -1,5 +1,5 @@
 #Use nginx base image
-FROM nginx:1.17.10
+FROM nginx:1.18.0-alpine
 
 # Delete default index.html
 RUN rm /usr/share/nginx/html/index.html

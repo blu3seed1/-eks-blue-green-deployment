@@ -1,4 +1,4 @@
-FROM nginx:1.17.10
+FROM nginx:1.18.0-alpine
 
 ## Step 1:
 RUN rm /usr/share/nginx/html/index.html
