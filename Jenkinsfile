@@ -22,5 +22,18 @@ pipeline {
       }
     }
 
+    stage('Set EKS Cluster') {
+      steps {
+        sh 'kubectl config use-context arn:aws:eks:us-east-1:818176152437:cluster/capstone'
+      }
+    }
+
+    stage('Create Controllers') {
+      steps {
+        sh 'cd blue && kubectl apply -f ./blue-controller.json && cd ..'
+        sh 'cd green && kubectl apply -f ./green-controller.json && cd ..'
+      }
+    }
+
   }
 }
