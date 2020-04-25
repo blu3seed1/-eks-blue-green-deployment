@@ -35,5 +35,11 @@ pipeline {
       }
     }
 
+    stage('Create ELB') {
+      steps {
+        sh 'kubectl apply -f ./blue-green-service.json'
+      }
+    }
+
   }
 }
