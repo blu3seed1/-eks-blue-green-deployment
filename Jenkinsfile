@@ -24,7 +24,7 @@ pipeline {
 
     stage('Set EKS Cluster') {
       steps {
-        sh 'kubectl config use-context arn:aws:eks:us-east-1:818176152437:cluster/capstone'
+        sh 'kubectl config use-context arn:aws:eks:us-west-2:818176152437:cluster/capstone'
       }
     }
 
