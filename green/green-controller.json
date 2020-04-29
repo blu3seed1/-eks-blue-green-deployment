@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"green",
-                  "image":"deploygreen/capstone",
+                  "image":"bpyne/deploygreen:capstone",
                   "ports":[
                      {
                         "name":"http-server",
