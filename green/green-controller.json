@@ -22,7 +22,7 @@
             "containers":[
                {
                   "name":"green",
-                  "image":"bpyne/deploygreen:capstone",
+                  "image":"818176152437.dkr.ecr.us-east-1.amazonaws.com/deploygreen:capstone",
                   "ports":[
                      {
                         "name":"http-server",
