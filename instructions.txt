@@ -1,0 +1,72 @@
+Instructions for setting up eks-blue-green-deployment
+
+
+#deploy jenkins build server
+###
+launch an Amazon EC2 instance using the Amazon Linux 2 AMI, install and configure the required packages. 
+Make sure that the security group you select for your instance allows traffic on ports TCP/22 and TCP/80 
+so you will be able to connect to you instance via SSH and access it via browser using its DNS
+###
+#login to server
+reference https://medium.com/faun/ci-cd-pipeline-with-jenkins-and-aws-s3-c08a3656d38
+
+Install
+-jenkins
+-docker
+-awscli
+-kubctl
+-git
+
+#instll hadolint
+docker pull hadolint/hadolint
+
+#install plugins
+-aws
+-blue Ocean
+-kubernetes
+-github
+
+#see Jenkinsfile
+
+#deploy EKS infrastructure via eksctl/cloudformation
+eksctl create cluster --name capstone1 --managed --region=us-east-1
+
+#update kubeconfig
+aws eks --region us-east-1 update-kubeconfig --name capstone1
+#or
+kubectl config use-context arn:aws:eks:us-east-1:818176152437:cluster/capstone1
+
+#update repo 
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 818176152437.dkr.ecr.us-east-1.amazonaws.com
+
+#########################################################################################
+#build Jenkins pipeline
+
+#blue green deployment 
+vi blue-green-service.json
+#[update] app=green
+#[update] app=blue
+
+#update service
+kubectl apply -f ./blue-green-service.json
+
+
+
+##########################################################################################
+
+#usefull troubleshooting
+###
+#list the worker nodes registered to the Amazon EKS control plane
+kubectl get nodes -o wide
+
+#To get additional information on a single worker node
+kubectl describe node/node_name
+
+#get all pods and images
+kubectl get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}"
+
+#Display addresses of the master and services
+kubectl cluster-info
+
+#get List Services 
+kubectl get services -o wide
