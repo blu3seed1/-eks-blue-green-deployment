@@ -41,5 +41,11 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        sh 'kubectl describe svc | grep "LoadBalancer Ingress:"'
+      }
+    }
+
   }
 }
