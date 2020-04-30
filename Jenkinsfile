@@ -43,7 +43,7 @@ pipeline {
 
     stage('Get URL') {
       steps {
-        sh 'url.sh'
+        sh './url.sh'
       }
     }
 
