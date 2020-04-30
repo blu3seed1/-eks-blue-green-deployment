@@ -43,7 +43,8 @@ pipeline {
 
     stage('Get URL') {
       steps {
-        sh './url.sh'
+        sh '''LB=$(kubectl describe svc | grep "LoadBalancer Ingress:" | awk \'{print $NF}\') 
+echo "http://"${LB}":8000"'''
       }
     }
 
